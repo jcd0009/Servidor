@@ -1,0 +1,11 @@
+VIDEOJUEGOS
+----------------------
+-titulo = 1-80 caracteres, cualquier caracter
+-consola = Nintendo Switch, PS5, PS4, Xbox Series X/S, PC
+	(radio button)
+-fecha de lanzamiento = el videojuego mas antiguo admisible será del 1 de enero de 1947, y el más en el futuro no podrá dentro de más de 5 años (dinámico)
+-pegi = 3,7,12,16,18 (select)
+-descripcion = 0-255 caracteres, cualquier caracter (campo opcional) - (text area)
+
+- LIMPIAR LOS DATOS DEL FORMULARIO Y VALIDARLOS
+- MOSTRAR TODO POR PANTALLA

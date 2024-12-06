@@ -1,0 +1,97 @@
+/* Estilo global */
+body {
+    background: linear-gradient(to right, #9b4dca, #06b6d4); /* Gradiente de morado a cian */
+    background-size: cover;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    flex-direction: column; /* Para centrar todo de manera vertical */
+    text-align: center;
+}
+
+/* Contenedor */
+.container {
+    max-width: 900px; /* Reducir el ancho para mayor enfoque */
+    margin: 20px auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semitransparente */
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Título */
+h1 {
+    color: #c084fc; /* Morado brillante */
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+p{
+    color: black;
+}
+
+
+/* Botones */
+.btn {
+    border-radius: 5px; /* Bordes más suaves */
+    padding: 12px 24px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    margin: 10px; /* Espacio entre los botones */
+}
+
+.btn-primary {
+    background: #c084fc; /* Morado */
+    color: #121212;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #a855f7;
+    transform: scale(1.05);
+}
+
+.btn-warning {
+    background: #d1e428; /* Amarillo */
+    color: #121212;
+    font-weight: bold;
+}
+
+.btn-warning:hover {
+    background: #d97706;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background: #f50b0b; /* Rojo */
+    color: #121212;
+    font-weight: bold;
+}
+
+.btn-danger:hover {
+    background: #d97706;
+    transform: scale(1.05);
+}
+
+footer {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
+}
