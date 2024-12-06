@@ -1,3 +1,14 @@
+<?php
+    session_start(); // Iniciar la sesión
+
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['usuario'])) {
+        
+        header("Location: ../usuario/iniciar_sesion.php");
+        exit();
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,10 +36,10 @@
                 if($tmp_categoria == "") {
                     $error_categoria = "Debes introducir un titulo";
                 } else {
-                    if(strlen($tmp_categoria) <1 || strlen($tmp_categoria) >30 ){
+                    if(strlen($tmp_categoria) <2 || strlen($tmp_categoria) >30 ){
                         $error_categoria = "El nombre de la categoria no puede tener mas de 30 caracteres";
                     } else {
-                        $patron ="/^[a-zA-Zaéíóú´AÉÍÓÚñÑ ]{1,30}$/";
+                        $patron ="/^[a-zA-Zaéíóú´AÉÍÓÚñÑ ]{2,30}$/";
 
                     if(!preg_match($patron, $tmp_categoria)){
                         $error_categoria = "El nombre solo puede contener letras y espacios";
@@ -43,10 +54,10 @@
                 if($tmp_descripcion == "") {
                     $error_descripcion = "Debes introducir una descripcion";
                 } else {
-                    if(strlen($tmp_descripcion) <1 || strlen($tmp_descripcion) > 255){
+                    if(strlen($tmp_descripcion) <2 || strlen($tmp_descripcion) > 255){
                         $error_descripcion = "El nombre de la categoria no puede tener mas de 255 caracteres";
                     } else {
-                        $patron ="/^[a-zA-Zaéíóú´AÉÍÓÚñÑ., ]{1,255}$/";
+                        $patron ="/^[a-zA-Zaéíóú´AÉÍÓÚñÑ., ]{2,255}$/";
 
                     if(!preg_match($patron, $tmp_descripcion)){
                         $error_descripcion = "El nombre solo puede contener letras y espacios";
@@ -56,30 +67,45 @@
                     
                     }
                     
-                }
-                
+                }   
+
+                // Verificar si no hay errores en la categoría y descripción
                 if (empty($error_categoria) && empty($error_descripcion)) {
-                    $sql = "INSERT INTO categorias (categoria, descripcion) VALUES ('$categoria', '$descripcion')";
-                
-                    if ($_conexion->query($sql) === TRUE) {
-                        echo "<div class='alert alert-success'>Categoría añadida con éxito.</div>";
+
+                    // Verificar si la categoría ya existe
+                    $sql = "SELECT * FROM categorias WHERE categoria = '$categoria'";
+                    $resultado = $_conexion->query($sql);
+
+                    if ($resultado->num_rows > 0) {
+                        // Si ya existe una categoría con el mismo nombre
+                        $error_categoria = "Ya existe una categoría con ese nombre.";
                     } else {
-                        echo "<div class='alert alert-danger'>Error al insertar la categoría: " . $_conexion->error . "</div>";
+                        // Insertar nueva categoría si no hay duplicados
+                        $sql = "INSERT INTO categorias (categoria, descripcion) VALUES ('$categoria', '$descripcion')";
+                        
+                        if ($_conexion->query($sql) === TRUE) {
+                            echo "<div class='alert alert-success'>Categoría añadida con éxito.</div>";
+                        } else {
+                            echo "<div class='alert alert-danger'>Error al insertar la categoría: " . $_conexion->error . "</div>";
+                        }
                     }
                 }
-                
-                
             }
 
-        $sql = "SELECT * FROM categorias ORDER BY categoria";
-        $resultado = $_conexion -> query($sql);
-        $categorias = [];
+            // Obtener todas las categorías de la base de datos
+            $sql = "SELECT * FROM categorias ORDER BY categoria";
+            $resultado = $_conexion->query($sql);
+            $categorias = [];
 
-        while($fila = $resultado -> fetch_assoc()) {
-            array_push($categorias, $fila["categoria"]);
-        }
+            // Almacenar todas las categorías en un array
+            while($fila = $resultado->fetch_assoc()) {
+                array_push($categorias, $fila["categoria"]);
+            }
+
  
         ?>
+
+
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
         <div class="mb-3">
                 <label class="form-label">Nueva Categoria</label>

@@ -42,7 +42,7 @@
         if($tmp_pass == "") {
             $error_pass = "Debe introducir una contraseña";
         } else {
-            $patron = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,15}$/";
+            $patron = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\W_]{8,15}$/";
 
             if(!preg_match($patron, $tmp_pass)) {
                 $error_pass = "Debe tener entre 8 y 15 caracteres, y tiene que tener letras en mayus y minus, algun numero y puede tener caracteres especiales";

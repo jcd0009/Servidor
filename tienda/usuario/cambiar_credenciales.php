@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <?php
     session_start();
-    // Asegúrate de que el usuario esté logueado antes de acceder a esta página
+    
     if (!isset($_SESSION['usuario'])) {
         header("Location: ../usuario/iniciar_sesion.php");
         exit;
@@ -38,16 +38,16 @@
 
         // Validación de la contraseña actual
         if (empty($pass_actual)) {
-            $error_actual = "La contraseña actual es requerida.";
+            $error_actual = "Debes introducir tu contraseña.";
         }
 
         // Validación de la nueva contraseña
         if (empty($pass_nueva)) {
-            $error_nueva = "La nueva contraseña es requerida.";
+            $error_nueva = "Debes introducir una contraseña nueva.";
         } else {
-            $patron = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,15}$/";
+            $patron = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\W_]{8,15}$/";
             if (!preg_match($patron, $pass_nueva)) {
-                $error_nueva = "La nueva contraseña debe tener entre 8 y 15 caracteres, con letras mayúsculas, minúsculas, números y caracteres especiales.";
+                $error_nueva = "La nueva contraseña debe tener entre 8 y 15 caracteres, y tiene que tener letras en mayus y minus, algun numero y puede tener caracteres especiales.";
             }
         }
 
@@ -60,7 +60,7 @@
             if ($resultado->num_rows > 0) {
                 $datos_usuario = $resultado->fetch_assoc();
                 if (password_verify($pass_actual, $datos_usuario['pass'])) {
-                    // Contraseña actual es correcta, ciframos la nueva contraseña
+                    // Si la ontraseña actual es correcta ciframos la nueva contraseña
                     $pass_nueva_cifrada = password_hash($pass_nueva, PASSWORD_DEFAULT);
                     $sql_update = "UPDATE usuarios SET pass = '$pass_nueva_cifrada' WHERE usuario = '$usuario'";
 
@@ -86,13 +86,13 @@
         <form method="post" action="">
             <div class="mb-3">
                 <label for="pass_actual" class="form-label">Contraseña Actual</label>
-                <input type="password" class="form-control" id="pass_actual" name="pass_actual" required>
-                <?php if (!empty($error_actual)) echo "<span class='text-danger'>$error_actual</span>"; ?>
+                <input type="password" class="form-control" id="pass_actual" name="pass_actual">
+                <?php if (!empty($error_actual)) echo "<span class='error'>$error_actual</span>"; ?>
             </div>
             <div class="mb-3">
                 <label for="pass_nueva" class="form-label">Nueva Contraseña</label>
-                <input type="password" class="form-control" id="pass_nueva" name="pass_nueva" required>
-                <?php if (!empty($error_nueva)) echo "<span class='text-danger'>$error_nueva</span>"; ?>
+                <input type="password" class="form-control" id="pass_nueva" name="pass_nueva">
+                <?php if (!empty($error_nueva)) echo "<span class='error'>$error_nueva</span>"; ?>
             </div>
             <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
         </form>

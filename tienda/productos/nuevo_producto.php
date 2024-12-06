@@ -1,3 +1,14 @@
+<?php
+    session_start(); // Iniciar la sesión
+
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['usuario'])) {
+        
+        header("Location: ../usuario/iniciar_sesion.php");
+        exit();
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,6 +41,7 @@
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $tmp_nombre = $_POST["nombre"];
             $tmp_precio = $_POST["precio"];
+            $tmp_stock = $_POST["stock"];
             
             if(isset($_POST["categoria"])) {
                 $tmp_categoria = $_POST["categoria"];
@@ -48,13 +60,13 @@
                 $error_nombre = "Debes introducir un nombre";
             } else {
 
-                if(strlen($tmp_nombre)<1 || strlen($tmp_nombre) > 50) {
-                    $error_nombre = "No debe superar los 50 caracteres";
+                if(strlen($tmp_nombre)<2 || strlen($tmp_nombre) > 50) {
+                    $error_nombre = "Min: 2 Caracteres | Max: 50 caracteres";
                 } else {
-                    $patron = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}$/";
+                    $patron = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{2,50}$/";
 
                     if(!preg_match($patron, $tmp_nombre)){
-                        $error_nombre = "Solo puede itroducir letras y espacios";
+                        $error_nombre = "Solo puedes introducir letras, espacios y numeros";
                     } else {
                         $nombre = $tmp_nombre;
                     }
@@ -62,19 +74,44 @@
                 
             }
 
-            //el precio debe ser un número con hasta 4 dígitos enteros y, opcionalmente, hasta 2 dígitos decimales.
-            if($tmp_precio == "") {
-                $error_precio = "Debes introducir un numero";
+            // El precio máximo permitido según la base de datos
+            $precio_maximo = 9999.99;
+
+            // Eliminar espacios en blanco alrededor del precio
+            $tmp_precio = trim($tmp_precio);
+
+            if ($tmp_precio == "") {
+                $error_precio = "Debes introducir un número";
             } else {
 
-                $patron="/^[0-9]{1,4}(\.[0-9]{1,2})?$/";
+                $patronCaracteres = "/[^0-9\.\-]/";  // Permite el signo "-" y el punto decimal
 
-                if(!preg_match($patron, $tmp_precio)){
-                    $error_precio = "Debe ser un número con hasta 4 dígitos enteros y, opcionalmente, hasta 2 dígitos decimales.";
+                if (preg_match($patronCaracteres, $tmp_precio)) {
+                    $error_precio = "Solo se permiten números y un punto decimal.";
                 } else {
-                    $precio = $tmp_precio;
-                }
 
+                    //Hasta 4 dígitos enteros y hasta 2 decimales opcionales
+                    $patronFormato = "/^-?[0-9]{1,4}(\.[0-9]{1,2})?$/";  // Permitimos un signo negativo opcional
+
+                    if (!preg_match($patronFormato, $tmp_precio)) {
+                        $error_precio = "Se permiten productos de 4 dígitos enteros y hasta 2 decimales opcionales";
+                    } else {
+
+                        //numero flotante para hacer las comparaciones
+                        $tmp_precio = floatval($tmp_precio);
+
+                        if ($tmp_precio < 0) {
+                            $error_precio = "El precio no puede ser negativo.";
+                        } 
+                        
+                        else if ($tmp_precio > $precio_maximo) {
+                            $error_precio = "El precio no puede ser mayor a $precio_maximo";
+                        } else {
+                            
+                            $precio = $tmp_precio;
+                        }
+                    }
+                }
             }
 
             //categoria
@@ -116,11 +153,45 @@
                 }
             }
 
+            //validar stock
+
+            // El stock máximo permitido 
+            $stock_maximo = 9999;
+
+            // Eliminar espacios en blanco alrededor del stock
+            $tmp_stock = trim($tmp_stock);
+
+            if ($tmp_stock == "") {
+                $error_stock = "Debes introducir un número";
+            } else {
+
+                // Asegurarnos de que solo contiene números enteros
+                if (!filter_var($tmp_stock, FILTER_VALIDATE_INT)) {
+                    $error_stock = "Solo se permiten números enteros.";
+                } else {
+
+                    // Convertir el valor a entero
+                    $tmp_stock = intval($tmp_stock);
+
+                    if ($tmp_stock < 0) {
+                        $error_stock = "El stock no puede ser negativo.";
+                    } 
+                    else if ($tmp_stock > $stock_maximo) {
+                        $error_stock = "El stock no puede ser mayor a $stock_maximo unidades.";
+                    } else {
+                        // El stock es válido
+                        $stock = $tmp_stock;
+                    }
+                }
+            }
+
+
+
 
             if (!isset($error_nombre) && !isset($error_precio) && !isset($error_categoria) && !isset($error_descripcion)) {
                 // Solo se ejecutará si no hay errores
-                $sql = "INSERT INTO productos (nombre, precio, categoria, imagen, descripcion) 
-                        VALUES ('$nombre', '$precio', '$categoria', '$ubicacion_final', '$descripcion')";
+                $sql = "INSERT INTO productos (nombre, precio, categoria, stock, imagen, descripcion) 
+                        VALUES ('$nombre', '$precio', '$categoria', $stock, '$ubicacion_final', '$descripcion')";
                 
                 if ($_conexion->query($sql) === TRUE) {
                     echo "<div class='alert alert-success'>Producto añadido con éxito.</div>";
@@ -145,6 +216,11 @@
                 <label class="form-label">Precio</label>
                 <input class="form-control" type="text" name="precio">
                 <?php if(isset($error_precio)) echo "<span class='error'>$error_precio</span>" ?>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Stock</label>
+                <input class="form-control" type="text" name="stock">
+                <?php if(isset($error_stock)) echo "<span class='error'>$error_stock</span>" ?>
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
