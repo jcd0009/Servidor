@@ -91,9 +91,9 @@
             </div>
         </form>
         <div class="mb-3">
-            <h3>Si ya tienes cuenta, inicia sesión o mira los Productos</h3>
+            <h3>Si ya tienes cuenta, inicia sesión o mira los Productos de la tienda</h3>
             <a class="btn btn-secondary" href="iniciar_sesion.php">Iniciar sesión</a>
-            <a class="btn btn-secondary" href="../index_sin_registro.php">Productos</a>
+            <a class="btn btn-secondary" href="../index.php">Productos</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

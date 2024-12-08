@@ -1,5 +1,5 @@
 <?php
-    session_start(); // Iniciar la sesión
+    session_start();
 
     // Verificar si el usuario ha iniciado sesión
     if (!isset($_SESSION['usuario'])) {
@@ -34,12 +34,12 @@
                 $descripcion = $fila["descripcion"];
         }
 
-        // Procesar el formulario
+        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $categoria = $_POST["categoria"];
             $descripcion = $_POST["descripcion"];
 
-            // Actualizar la categoría en la base de datos
+           
             $sql = "UPDATE categorias SET
                 categoria = '$categoria',
                 descripcion = '$descripcion'
@@ -53,7 +53,7 @@
             }
         }
 
-        // Obtener todas las categorías para el select
+        
         $sql = "SELECT * FROM categorias ORDER BY categoria";
         $resultado = $_conexion -> query($sql);
         $categorias = [];

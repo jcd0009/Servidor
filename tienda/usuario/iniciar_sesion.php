@@ -84,9 +84,9 @@
             </div>
         </form>
         <div class="mb-3">
-            <h3>Si aún no tienes cuenta, regístrate o Mira los productos</h3>
+            <h3>Si aún no tienes cuenta, regístrate o mira los productos de la tienda</h3>
             <a class="btn btn-secondary" href="registro.php">Registrarse</a>
-            <a class="btn btn-secondary" href="../index_sin_registro.php">Productos</a>
+            <a class="btn btn-secondary" href="../index.php">Productos</a>
             
         </div>
     </div>

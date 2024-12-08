@@ -13,7 +13,7 @@
         exit;
     }
 
-    // Conexión a la base de datos
+   
     require('../util/conexion.php');
     ?>
 
@@ -21,7 +21,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Botón con icono de flecha hacia la izquierda para regresar al índice principal -->
+    
     <a href="../usuario/iniciar_sesion.php" class="btn btn-secondary btn-volver">
         <i class="fas fa-arrow-left"></i>
     </a>
@@ -36,12 +36,12 @@
         $pass_actual = $_POST['pass_actual'];
         $pass_nueva = $_POST['pass_nueva'];
 
-        // Validación de la contraseña actual
+        
         if (empty($pass_actual)) {
             $error_actual = "Debes introducir tu contraseña.";
         }
 
-        // Validación de la nueva contraseña
+        
         if (empty($pass_nueva)) {
             $error_nueva = "Debes introducir una contraseña nueva.";
         } else {
@@ -51,7 +51,7 @@
             }
         }
 
-        // Si no hay errores, verificamos la contraseña actual
+        
         if (empty($error_actual) && empty($error_nueva)) {
             // Verificar la contraseña actual en la base de datos
             $sql = "SELECT pass FROM usuarios WHERE usuario = '$usuario'";

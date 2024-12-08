@@ -1,5 +1,5 @@
 <?php
-    session_start(); // Iniciar la sesión
+    session_start(); 
 
     // Verificar si el usuario ha iniciado sesión
     if (!isset($_SESSION['usuario'])) {
@@ -33,7 +33,7 @@
 </head>
 <body>
 
-    <!-- Botón con icono de flecha hacia la izquierda para regresar al índice principal -->
+    
     <a href="../index.php" class="btn btn-secondary btn-volver">
         <i class="fas fa-arrow-left"></i>
     </a>
@@ -46,7 +46,7 @@
                 
 
                 //  borrar el producto
-                $sql = "DELETE FROM categorias WHERE categoria = '$categoria'"; // Asegúrate de que la categoría esté entre comillas.
+                $sql = "DELETE FROM categorias WHERE categoria = '$categoria'"; 
 
                 $_conexion -> query($sql); // ejecuta la consulta SQL en la base de datos utilizando el objeto $_conexion (que es la conexión previamente establecida a la base de datos MySQL). Si la consulta es exitosa, el anime con el id_anime indicado será eliminado de la base de datos.
             }
