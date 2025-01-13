@@ -1,0 +1,172 @@
+USE TIENDA_BD;
+
+CREATE TABLE categorias (
+    categoria VARCHAR(30) PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE productos (
+id_producto INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50) NOT NULL,
+precio NUMERIC(6,2),
+stock INT DEFAULT 0,
+imagen VARCHAR(60) NOT NULL,
+descripcion VARCHAR(255) NOT NULL,
+categoria VARCHAR(30) NOT NULL,
+CONSTRAINT fk_categoria FOREIGN KEY (categoria) REFERENCES categorias(categoria)
+
+);
+
+INSERT INTO categorias (categoria, descripcion) 
+VALUES 
+('Apple', 'Dispositivos de APPLE como smartphones, ordenadores, relojes y más'),
+('Coches', 'Vehículos de diferentes marcas'),
+('Productos de Gimnasio', 'Suplementos deportivos y accesorios para entrenar');
+
+INSERT INTO productos (nombre, precio, imagen, descripcion, categoria) 
+VALUES  
+('iPhone 15 Pro', 1299.99, 'iphone15pro.jpg', 'Smartphone de última generación con pantalla OLED y procesador A17 Bionic', 'Apple'),
+('MacBook Air M2', 1099.99, 'macbook_air_m2.jpg', 'Ultraportátil con chip M2, pantalla Retina y batería de larga duración', 'Apple'),
+('Apple Watch Series 9', 399.99, 'apple_watch_series9.jpg', 'Reloj inteligente con funcionalidades de salud, GPS y más', 'Apple'),
+('Silla Ergonómica para Oficina', 89.99, 'silla_ergonomica.jpg', 'Silla ergonómica con soporte lumbar ajustable y diseño cómodo', 'Accesorios de Oficina'),
+('Teclado Mecánico RGB', 59.99, 'teclado_rgb.jpg', 'Teclado mecánico compacto con retroiluminación RGB programable', 'Accesorios de Oficina'),
+('Lámpara LED de Escritorio', 39.99, 'lampara_escritorio.jpg', 'Lámpara con luz ajustable, ideal para lectura o trabajo nocturno', 'Accesorios de Oficina'),
+('Proteína Whey Isolate 1kg', 49.99, 'whey_isolate.jpg', 'Suplemento premium para recuperación muscular y desarrollo', 'Productos de Gimnasio'),
+('Esterilla Yoga Antideslizante', 24.99, 'esterilla_yoga.jpg', 'Esterilla resistente para yoga, pilates o ejercicios funcionales', 'Productos de Gimnasio'),
+('Banda Elástica de Resistencia', 15.99, 'banda_resistencia.jpg', 'Banda de goma ideal para entrenamiento de fuerza y movilidad', 'Productos de Gimnasio');
+
+
+
+
+SELECT * FROM categorias;
+SELECT * FROM productos;
+
+DELETE FROM productos WHERE id_producto > 0;
+
+ALTER TABLE productos AUTO_INCREMENT = 1;
+INSERT INTO productos (nombre, precio, stock, descripcion, categoria) 
+VALUES  
+('iPhone 15 Pro', 1299.99, 50, 'Smartphone de última generación con pantalla OLED y procesador A17 Bionic', 'Apple'),
+('MacBook Air M2', 1099.99, 30, 'Ultraportátil con chip M2, pantalla Retina y batería de larga duración', 'Apple'),
+('Apple Watch Series 9', 399.99, 70, 'Reloj inteligente con funcionalidades de salud, GPS y más', 'Apple'),
+('Silla Ergonómica para Oficina', 89.99, 20, 'Silla ergonómica con soporte lumbar ajustable y diseño cómodo', 'Accesorios de Oficina'),
+('Teclado Mecánico RGB', 59.99, 50, 'Teclado mecánico compacto con retroiluminación RGB programable', 'Accesorios de Oficina'),
+('Lámpara LED de Escritorio', 39.99, 100, 'Lámpara con luz ajustable, ideal para lectura o trabajo nocturno', 'Accesorios de Oficina'),
+('Proteína Whey Isolate 1kg', 49.99, 100, 'Suplemento premium para recuperación muscular y desarrollo', 'Productos de Gimnasio'),
+('Esterilla Yoga Antideslizante', 24.99, 200, 'Esterilla resistente para yoga, pilates o ejercicios funcionales', 'Productos de Gimnasio'),
+('Banda Elástica de Resistencia', 15.99, 150, 'Banda de goma ideal para entrenamiento de fuerza y movilidad', 'Productos de Gimnasio');
+
+
+SELECT id_producto, imagen FROM productos;
+
+
+-- Elimina la clave foránea existente
+ALTER TABLE productos
+DROP FOREIGN KEY fk_categoria;
+
+-- Agrega la clave foránea con la opción ON UPDATE CASCADE
+ALTER TABLE productos
+ADD CONSTRAINT fk_categoria
+FOREIGN KEY (categoria) REFERENCES categorias(categoria)
+ON UPDATE CASCADE;
+
+TRUNCATE TABLE productos;
+
+INSERT INTO productos (nombre, precio, imagen, descripcion, categoria) 
+VALUES  
+('iPhone 15 Pro', 1299.99, 'iphone15pro.jpg', 'Smartphone de última generación con pantalla OLED y procesador A17 Bionic', 'Apple'),
+('MacBook Air M2', 1099.99, 'macbook_air_m2.jpg', 'Ultraportátil con chip M2, pantalla Retina y batería de larga duración', 'Apple'),
+('Apple Watch Series 9', 399.99, 'apple_watch_series9.jpg', 'Reloj inteligente con funcionalidades de salud, GPS y más', 'Apple'),
+('Silla Ergonómica para Oficina', 89.99, 'silla_ergonomica.jpg', 'Silla ergonómica con soporte lumbar ajustable y diseño cómodo', 'Accesorios de Oficina'),
+('Teclado Mecánico RGB', 59.99, 'teclado_rgb.jpg', 'Teclado mecánico compacto con retroiluminación RGB programable', 'Accesorios de Oficina'),
+('Lámpara LED de Escritorio', 39.99, 'lampara_escritorio.jpg', 'Lámpara con luz ajustable, ideal para lectura o trabajo nocturno', 'Accesorios de Oficina'),
+('Proteína Whey Isolate 1kg', 49.99, 'whey_isolate.jpg', 'Suplemento premium para recuperación muscular y desarrollo', 'Productos de Gimnasio'),
+('Esterilla Yoga Antideslizante', 24.99, 'esterilla_yoga.jpg', 'Esterilla resistente para yoga, pilates o ejercicios funcionales', 'Productos de Gimnasio'),
+('Banda Elástica de Resistencia', 15.99, 'banda_resistencia.jpg', 'Banda de goma ideal para entrenamiento de fuerza y movilidad', 'Productos de Gimnasio');
+
+SELECT * FROM categorias;
+SELECT * FROM productos;
+
+SELECT * FROM usuarios;
+DELETE FROM usuarios;
+DELETE FROM usuarios WHERE id_usuario IS NOT NULL;
+TRUNCATE TABLE usuarios;
+
+
+
+
+
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS categorias;
+
+
+CREATE TABLE categorias (
+    categoria VARCHAR(30) PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    precio NUMERIC(6,2) NOT NULL,
+    stock INT DEFAULT 0,
+    imagen VARCHAR(60) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    categoria VARCHAR(30) NOT NULL,
+    CONSTRAINT fk_categoria FOREIGN KEY (categoria) REFERENCES categorias(categoria)
+);
+
+
+INSERT INTO categorias (categoria, descripcion)
+VALUES 
+('Apple', 'Dispositivos de APPLE como smartphones, ordenadores, relojes y más'),
+('Accesorios de Oficina', 'Artículos y equipos para oficina y trabajo'),
+('Productos de Gimnasio', 'Suplementos deportivos y accesorios para entrenar');
+
+
+INSERT INTO productos (nombre, precio, imagen, descripcion, categoria) 
+VALUES  
+('iPhone 15 Pro', 1299.99, 'iphone15pro.jpg', 'Smartphone de última generación con pantalla OLED y procesador A17 Bionic', 'Apple'),
+('MacBook Air M2', 1099.99, 'macbook_air_m2.jpg', 'Ultraportátil con chip M2, pantalla Retina y batería de larga duración', 'Apple'),
+('Apple Watch Series 9', 399.99, 'apple_watch_series9.jpg', 'Reloj inteligente con funcionalidades de salud, GPS y más', 'Apple'),
+('Silla Ergonómica para Oficina', 89.99, 'silla_ergonomica.jpg', 'Silla ergonómica con soporte lumbar ajustable y diseño cómodo', 'Accesorios de Oficina'),
+('Teclado Mecánico RGB', 59.99, 'teclado_rgb.jpg', 'Teclado mecánico compacto con retroiluminación RGB programable', 'Accesorios de Oficina'),
+('Lámpara LED de Escritorio', 39.99, 'lampara_escritorio.jpg', 'Lámpara con luz ajustable, ideal para lectura o trabajo nocturno', 'Accesorios de Oficina'),
+('Proteína Whey Isolate 1kg', 49.99, 'whey_isolate.jpg', 'Suplemento premium para recuperación muscular y desarrollo', 'Productos de Gimnasio'),
+('Esterilla Yoga Antideslizante', 24.99, 'esterilla_yoga.jpg', 'Esterilla resistente para yoga, pilates o ejercicios funcionales', 'Productos de Gimnasio'),
+('Banda Elástica de Resistencia', 15.99, 'banda_resistencia.jpg', 'Banda de goma ideal para entrenamiento de fuerza y movilidad', 'Productos de Gimnasio');
+
+
+
+
+
+INSERT INTO productos (nombre, precio, imagen, descripcion, categoria) 
+VALUES  
+('iPhone 15 Pro', 1299.99, 'iphone15pro.jpg', 'Smartphone de última generación con pantalla OLED y procesador A17 Bionic', 'Apple'),
+('MacBook Air M2', 1099.99, 'macbook_air_m2.jpg', 'Ultraportátil con chip M2, pantalla Retina y batería de larga duración', 'Apple'),
+('Apple Watch Series 9', 399.99, 'apple_watch_series9.jpg', 'Reloj inteligente con funcionalidades de salud, GPS y más', 'Apple'),
+('Silla Ergonómica para Oficina', 89.99, 'silla_ergonomica.jpg', 'Silla ergonómica con soporte lumbar ajustable y diseño cómodo', 'Accesorios de Oficina'),
+('Teclado Mecánico RGB', 59.99, 'teclado_rgb.jpg', 'Teclado mecánico compacto con retroiluminación RGB programable', 'Accesorios de Oficina'),
+('Lámpara LED de Escritorio', 39.99, 'lampara_escritorio.jpg', 'Lámpara con luz ajustable, ideal para lectura o trabajo nocturno', 'Accesorios de Oficina'),
+('Proteína Whey Isolate 1kg', 49.99, 'whey_isolate.jpg', 'Suplemento premium para recuperación muscular y desarrollo', 'Productos de Gimnasio'),
+('Esterilla Yoga Antideslizante', 24.99, 'esterilla_yoga.jpg', 'Esterilla resistente para yoga, pilates o ejercicios funcionales', 'Productos de Gimnasio'),
+('Banda Elástica de Resistencia', 15.99, 'banda_resistencia.jpg', 'Banda de goma ideal para entrenamiento de fuerza y movilidad', 'Productos de Gimnasio');
+
+ALTER TABLE productos DROP FOREIGN KEY fk_categoria;
+ALTER TABLE productos ADD CONSTRAINT fk_categoria
+FOREIGN KEY (categoria) REFERENCES categorias(categoria)
+ON DELETE CASCADE;
+
+
+ALTER TABLE productos DROP FOREIGN KEY fk_categoria;
+ALTER TABLE productos ADD CONSTRAINT fk_categoria
+FOREIGN KEY (categoria) REFERENCES categorias(categoria)
+ON UPDATE CASCADE;
+
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE usuarios (
+	usuario VARCHAR(15)PRIMARY KEY,
+    pass VARCHAR(255)
+);
+

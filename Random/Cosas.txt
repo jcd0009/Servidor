@@ -1,0 +1,73 @@
+Formularios
+
+- isset comprueba si una variable ha sido definida o es null
+
+- <input class="btn btn-primary" type="submit"(al ser clickado enviara el formulario al servidor) value="Enviar"()texto>
+
+-preg_match($patron, $tmp_dni): Esta función de PHP se utiliza para realizar una búsqueda en la cadena $tmp_dni utilizando la expresión regular almacenada en $patron. Devuelve 1 si hay una coincidencia, 0 si no hay coincidencia, o false si ocurre un error.
+
+// substr se utiliza para obtener una parte de una cadena
+                                    
+    $numero_dni = (int)substr($tmp_dni,0,8);
+    aqui coge de $tmp_dni del valor 0 al 8
+    0 es el indice inicial  8 son los valores que coge
+
+    $numero_dni = (int)substr($tmp_dni,0,8);
+        $letra_dni = substr($tmp_dni, 8, 1);
+
+        aqui empieza en el valor 8 y coge 1 que es la letra
+
+-   strlen($tmp_nombre): Esta función en PHP se utiliza para obtener la longitud (número de caracteres) de la cadena $tmp_nombre.
+
+$nombre = ucwords($nombre); lo que hace es poner la primera letra de cada palabra en mayuscula
+
+Aquí se utiliza explode('-', $fecha_actual);, que divide la cadena de la fecha ($fecha_actual) en tres partes usando el guion (-) como delimitador.
+
+La función list(...) asigna cada una de estas partes a las variables $anno_actual (año), $mes_actual (mes), y $dia_actual (día).
+
+explode sirve para descomponer la fecha en diferentes valores
+
+
+/*FUNCIONES PHP IMPORTANTES*/
+
+Para poner un patron:
+	--> $patron = "/^...$/";
+
+preg_match($patron, $variable);
+	--> Te comprueba si la variable cumple la condicion de el patron.
+strlen($variable);
+	--> Te dice el tamaño que tiene la variable.
+isset($variable);
+	--> Te dice si la variable ha sido creada o no;
+filter_var($variable, FILTER_VALIDATE_EMAIL);
+	--> Te valida si la variable es un email.
+	""("", FILTER_VALIDATE_FLOAT);
+		--> Te valida si la variable es un float
+	""("", FILTER_VALIDATE_INT);
+		--> Te valida si la variable es un int
+in_array($variable, $array);
+	--> Te dice si lo que hay en la variable esta dentro del array;
+strtoupper($variable);
+	--> Pone Las letras en mayusculas
+substr($variable, n1, n2);
+	--> Te coge la parte de la cadena que le digas desde n1, mientras que n2 es el numero de caracteres que coge.
+date("Y-m-d");
+	--> Obtiene la fecha actual en un formato especifico.
+	""("d/m/Y");
+		--> Obtiene la fecha en un formato especifico.
+explode('caracter', $variable);
+	--> Divide una cadena en varias partes usanso el caracter como punto de corte y devuelve un array.
+str_contains($cadena, $buscar);
+	--> Busca el contenido de la variable buscar en la cadena;
+is_numeric($variable);
+	--> Ve si la variable es numerica
+ucwords($variable);
+	--> Convierte la primera letra de cada palabra en una cadena de texto
+
+function depurar(string $entrada) : string {  --> Para que los parametros sean string y lo que salga sea string.
+	$salida = htmlspecialchars($entrada);  --> Esto nos pone en modo texto cualquier cosa por si nos mete scripts y demas.
+	$salida = trim($salida);  --> Esto lo que hace es quitar los espacios de los laterales.
+	$salida = stripslashes($salida);  --> esto te quita muchos \ que te puedan hacer bugs dentro de la aplicacion.
+	$salida = preg_replace('!\s!', ' ', $salida);  --> esto nos quita todos los espacios sobrantes dentro de la cadena.
+	return $salida;
+}
