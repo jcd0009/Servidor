@@ -72,18 +72,8 @@
             $sql -> execute();
         }
 
-        /* $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
-        $resultado = $_conexion -> query($sql); */
-
-        #1. Prepare
-        $sql = $_conexion -> prepare ("SELECT * FROM estudios ORDER BY nombre_estudio");
-        #2. Binding
-        $sql -> bind_param("s",$nombre_estudio);
-        #3. execute
-        $sql -> execute();
-        #4. retrieve
-        $resultado = $sql -> get_result();
-
+        $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
+        $resultado = $_conexion -> query($sql);
         $_conexion -> close();
         $estudios = [];
 
