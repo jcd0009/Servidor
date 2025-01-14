@@ -81,13 +81,26 @@
                         $error_categoria = "Ya existe una categoría con ese nombre.";
                     } else {
                         // Insertar nueva categoría si no hay duplicados
-                        $sql = "INSERT INTO categorias (categoria, descripcion) VALUES ('$categoria', '$descripcion')";
-                        
-                        if ($_conexion->query($sql) === TRUE) {
+                        /* $sql = "INSERT INTO categorias (categoria, descripcion) VALUES ('$categoria', '$descripcion')"; */
+
+                        //1. Preparacion
+                        $sql = $_conexion ->prepare("INSERT INTO categorias (categoria, descripcion) VALUES (?,?)");
+
+                        //2. Enlazado
+                        $sql -> bind_param("ss",
+                            $categoria,
+                            $descripcion
+                        );
+
+                        //3.Ejecucion
+                        if ($sql->execute()) {
                             echo "<div class='alert alert-success'>Categoría añadida con éxito.</div>";
                         } else {
-                            echo "<div class='alert alert-danger'>Error al insertar la categoría: " . $_conexion->error . "</div>";
+                            echo "<div class='alert alert-danger'>Error al insertar la categoría: " . $sql->error . "</div>";
                         }
+                        
+                        // Cerrar la sentencia preparada
+                        $sql->close();
                     }
                 }
             }
