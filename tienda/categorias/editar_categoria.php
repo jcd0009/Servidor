@@ -26,8 +26,20 @@
 
 
         // Consultar la categoría actual en la base de datos
-        $sql = "SELECT * FROM categorias WHERE categoria = '$categoria_actual'";
-        $resultado = $_conexion -> query($sql);
+        /* $sql = "SELECT * FROM categorias WHERE categoria = '$categoria_actual'";
+        $resultado = $_conexion -> query($sql); */
+
+        # 1.Prepare
+        $sql = $_conexion -> prepare("SELECT * FROM categorias WHERE categoria = ?");
+
+        # 2.Binding
+        $sql -> bind_param("s", $categoria_actual);
+
+        # 3.Execute
+        $sql -> execute();
+
+        # 4. Retrieve
+        $resultado = $sql -> get_result();
 
         while($fila = $resultado -> fetch_assoc()) {
                 $categoria = $fila["categoria"];
