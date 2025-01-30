@@ -80,15 +80,17 @@
 
 
     <?php
-        if ($pagination["current_page"] > 1) { ?>
-            <a href="?page=<?php echo $page-1 ?>&type=<?php echo $tipo ?>">Anterior</a>
-        <?php }
-        if ($pagination["has_next_page"]) { ?>
-            <a href="?page=<?php echo $page+1 ?>&type=<?php echo $tipo ?>">Siguiente</a>
-        <?php } ?>
-
-        
+    // Verifica si el número de página actual es mayor a 1 para mostrar el enlace "Anterior".
+    if ($pagination["current_page"] > 1) { ?>
+        <!-- Crea un enlace "Anterior" que disminuye el número de página en 1 y mantiene el tipo seleccionado. -->
+        <a href="?page=<?php echo $page-1 ?>&type=<?php echo $tipo ?>">Anterior</a>
+    <?php }
     
+    // Verifica si hay una página siguiente disponible para mostrar el enlace "Siguiente".
+    if ($pagination["has_next_page"]) { ?>
+        <!-- Crea un enlace "Siguiente" que aumenta el número de página en 1 y mantiene el tipo seleccionado. -->
+        <a href="?page=<?php echo $page+1 ?>&type=<?php echo $tipo ?>">Siguiente</a>
+    <?php } ?>
 
 </body> 
 </html>
