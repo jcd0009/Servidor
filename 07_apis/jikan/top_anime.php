@@ -8,8 +8,12 @@
         error_reporting( E_ALL );
         ini_set("display_errors", 1 );    
     ?>
+    <link rel="stylesheet" href="../CSS/estiloTopAnime.css">
 </head>
 <body>
+    
+    <div class="container">
+    <h1>Animes</h1>
 <?php
      $apiUrl = "https://api.jikan.moe/v4/top/anime"; //inicia la url de la api
      
@@ -26,8 +30,6 @@
      }
     
 
-    echo "<p>URL de la API: <a href='$apiUrl'>$apiUrl</a></p>";
-
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $apiUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -40,13 +42,16 @@
         //print_r($animes);
     ?>
     <form action="" method="GET">
-        <input class="form-check.input" type="radio" name="type" id="tv" value="tv">
-        <label class="form.check-label" for="tv">Serie</label>
-        <input class="form-check.input" type="radio" name="type" id="movie" value="movie">
-        <label class="form.check-label" for="movie">Pelicula</label>
-        <input class="form-check.input" type="radio" name="type" id="" value="">
-        <label class="form.check-label" for="">Todos</label>
-        <input class="btn btn-info" type="submit" value="aplicar">
+        <input type="radio" name="type" id="tv" value="tv">
+        <label for="tv">📺 Serie</label>
+
+        <input type="radio" name="type" id="movie" value="movie">
+        <label for="movie">🎬 Película</label>
+
+        <input type="radio" name="type" id="all" value="">
+        <label for="all">🌎 Todos</label>
+
+        <input type="submit" value="Aplicar">
     </form>
     <br><br>
 
@@ -91,6 +96,6 @@
         <!-- Crea un enlace "Siguiente" que aumenta el número de página en 1 y mantiene el tipo seleccionado. -->
         <a href="?page=<?php echo $page+1 ?>&type=<?php echo $tipo ?>">Siguiente</a>
     <?php } ?>
-
+    </div>
 </body> 
 </html>

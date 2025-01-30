@@ -1,0 +1,178 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, cyan, rgb(128, 0, 128));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Styles */
+.container {
+    background: rgba(255, 255, 255, 0.8); /* Translúcido */
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 90vh;
+    height: 90vh; /* Ocupa toda la altura de la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para distribuir el contenido */
+    overflow: auto; /* Para evitar que el contenido se salga */
+    box-sizing: border-box;
+    
+    
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0; /* Espacio arriba y abajo */
+}
+
+/* Ocultar los radio buttons */
+form input[type="radio"] {
+    display: none;
+}
+
+/* Estilizar las etiquetas como botones */
+form label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2a9993;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover */
+form label:hover {
+    background: #23837f;
+    transform: scale(1.05);
+}
+
+/* Estilo cuando está seleccionado */
+form input[type="radio"]:checked + label {
+    background: rgb(128, 0, 128);
+    color: white;
+    box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
+}
+
+/* Botón de aplicar */
+form input[type="submit"] {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover en el botón */
+form input[type="submit"]:hover {
+    background-color: #138496;
+    transform: scale(1.05);
+}
+
+
+/* Estilo General de la Tabla */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Encabezados de la Tabla */
+table thead {
+    background: rgb(128, 0, 128);
+    color: white;
+    font-weight: bold;
+}
+
+table th {
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Celdas de la Tabla */
+table td {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Bordes Redondeados en las Esquinas */
+table thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+table thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+/* Alternar colores de fondo en filas */
+table tbody tr:nth-child(odd) {
+    background: rgba(128, 0, 128, 0.05);
+}
+
+/* Efecto Hover en las Filas */
+table tbody tr:hover {
+    background: rgba(128, 0, 128, 0.1);
+    transition: background 0.3s ease;
+}
+
+/* Estilo para Imágenes dentro de la Tabla */
+table img {
+    width: 60px;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto Hover en las Imágenes */
+table img:hover {
+    transform: scale(1.1);
+}
+
+
+/* Pagination Links */
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+h1 {
+    text-align: center;
+}

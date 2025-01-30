@@ -1,0 +1,84 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, cyan, rgb(128, 0, 128));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Styles */
+.container {
+    background: rgba(255, 255, 255, 0.8); /* Translúcido */
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 850px;
+    width: 90vh;
+    height: 90vh;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+/* Titulos */
+h1, h2, h3 {
+    text-align: center;
+    color: rgb(128, 0, 128);
+}
+
+/* Imagen del Productor */
+.anime-img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.anime-img:hover {
+    transform: scale(1.1);
+}
+
+/* Lista */
+ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+ul li {
+    padding: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Enlaces */
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+.btn-volver {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+    background-color: #45a049;
+}
