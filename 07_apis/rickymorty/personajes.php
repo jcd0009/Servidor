@@ -12,7 +12,7 @@
         
         <form action="" method="get">
             <label for="cantidad">Cantidad de personajes:</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" max="20" required>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="20" placeholder="Nº de personajes" required>
             
             <label for="gender">Género:</label> 
             <select name="gender" id="gender" required>
@@ -36,11 +36,7 @@
             $cant = intval($_GET["cantidad"]);
             $genero = $_GET["gender"];
             $especie = $_GET["species"];
-            
-            if ($cant < 1 || $cant > 20) {
-                echo "<div style='color: white; font-weight: bold;'>⚠️ La cantidad debe estar entre 1 y 20.</div>";
-                exit();
-            }
+
 
             $apiUrl = "https://rickandmortyapi.com/api/character/?gender=$genero&species=$especie";
 
@@ -51,7 +47,7 @@
             curl_close($curl);
 
             $datos = json_decode($respuesta, true);
-            $personajes = array_slice($datos["results"], 0, $cant); 
+            $personajes = array_slice($datos["results"], 0, $cant);//0 es donde empieza y $cant lo que esta ingresado en el input
         ?>
         
         <table>
