@@ -1,7 +1,5 @@
-<!-- Crea una página llamada perrito_aleatorio.php que nos muestre un perrito al azar. -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,24 +13,36 @@
     <h1>Perritos Random</h1>
 
     <?php
-    $apiUrl = "https://dog.ceo/api/breeds/image/random";
+    $perritos = ""; // Variable para almacenar la URL de la imagen
 
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $apiUrl);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    $respuesta = curl_exec($curl);
-    curl_close($curl);
+    // Solo hacer la petición a la API si el usuario ha presionado el botón
+    if(isset($_GET["random"])) {
+        $apiUrl = "https://dog.ceo/api/breeds/image/random";
 
-    $datos = json_decode($respuesta, true);
-    $perritos = $datos["message"];
+        // Inicializar cURL
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $apiUrl);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $respuesta = curl_exec($curl);
+        curl_close($curl);
+
+        // Decodificar JSON y obtener la URL de la imagen
+        $datos = json_decode($respuesta, true);
+        $perritos = $datos["message"]; 
+    }
     ?>
     
+    <!-- Formulario para generar un perrito aleatorio -->
     <form action="" method="GET">
-        <input type="submit" value="Random">
+        <input type="submit" name="random" value="Random">
     </form>
-    <br><br>
-    <img  width="500px" src="<?php echo $perritos; ?> ">  
 
-    
+    <br><br>
+
+    <!-- Mostrar la imagen solo si se ha obtenido una URL válida -->
+    <?php if (!empty($perritos)) { ?>
+        <img width="500px" src="<?php echo $perritos; ?>" alt="Perrito aleatorio">
+    <?php } ?>
+
 </body>
 </html>
