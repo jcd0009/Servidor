@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOG API</title>
+    <link rel="stylesheet" href="./CSS/estilo.css">
     <?php
         // Habilita la visualización de errores para facilitar la depuración
         error_reporting(E_ALL); 
@@ -55,6 +56,7 @@
     <form action="" method="GET">
         <label for="breed">Selecciona la raza de perro: </label>
         <select name="breed" id="breed">
+        <option disabled selected hidden>--- Elige una opción ---</option>
             <?php
                 // Recorre la lista de razas obtenida de la API
                 foreach($razas as $raza => $subRaza) { 

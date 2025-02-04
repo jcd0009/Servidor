@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Título de la página -->
     <title>Chistes CHUCK NORRIS</title>
+    <link rel="stylesheet" href="./CSS/estilo.css">
     <?php
         // Configuración para mostrar todos los errores durante el desarrollo
         error_reporting(E_ALL);
